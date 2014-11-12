@@ -31,14 +31,14 @@ public class InputPort extends SchemeUtils {
     }
 
     /**
-     * Construct an InputPort from a Reader. *
+     * Construct an InputPort from a Reader.
      */
     public InputPort(Reader in) {
         this.in = in;
     }
 
     /**
-     * Read and return a Scheme character or EOF. *
+     * Read and return a Scheme character or EOF.
      */
     public Object readChar() {
         try {
@@ -59,7 +59,7 @@ public class InputPort extends SchemeUtils {
 
     /**
      * Peek at and return the next Scheme character (or EOF).
-     * However, don't consume the character. *
+     * However, don't consume the character.
      */
     public Object peekChar() {
         int p = peekCh();
@@ -76,7 +76,7 @@ public class InputPort extends SchemeUtils {
     }
 
     /**
-     * Pop off the previously pushed character. *
+     * Pop off the previously pushed character.
      */
     int popChar() {
         isPushedChar = false;
@@ -85,7 +85,7 @@ public class InputPort extends SchemeUtils {
 
     /**
      * Peek at and return the next Scheme character as an int, -1 for EOF.
-     * However, don't consume the character. *
+     * However, don't consume the character.
      */
     public int peekCh() {
         try {
@@ -127,7 +127,7 @@ public class InputPort extends SchemeUtils {
     }
 
     /**
-     * Close the port.  Return TRUE if ok. *
+     * Close the port. Return TRUE if ok.
      */
     public Object close() {
         try {
@@ -139,7 +139,7 @@ public class InputPort extends SchemeUtils {
     }
 
     /**
-     * Is the argument the EOF object? *
+     * Is the argument the EOF object?
      */
     public static boolean isEOF(Object x) {
         return x == EOF;

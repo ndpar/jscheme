@@ -27,17 +27,11 @@ public class Scheme extends SchemeUtils {
      */
     public Scheme(String[] files) {
         Primitive.installPrimitives(globalEnvironment);
-        try {
-            load(new InputPort(new StringReader(SchemePrimitives.CODE)));
-            for (int i = 0; i < (files == null ? 0 : files.length); i++) {
-                load(files[i]);
-            }
-        } catch (RuntimeException e) {
-            ;
+        load(new InputPort(new StringReader(SchemePrimitives.CODE)));
+        for (String file : files) {
+            load(file);
         }
     }
-
-    //////////////// Main Loop
 
     /**
      * Create a new Scheme interpreter, passing in the command line args
@@ -70,13 +64,16 @@ public class Scheme extends SchemeUtils {
     /**
      * Eval all the expressions in a file. Calls load(InputPort).
      */
-    public Object load(Object fileName) {
-        String name = stringify(fileName, false);
+    public Object load(String fileName) {
         try {
-            return load(new InputPort(new FileInputStream(name)));
+            return load(new InputPort(new FileInputStream(fileName)));
         } catch (IOException e) {
-            return error("can't load " + name);
+            return error("can't load " + fileName);
         }
+    }
+
+    public Object load(Object fileName) {
+        return load(stringify(fileName, false));
     }
 
     /**
@@ -146,7 +143,7 @@ public class Scheme extends SchemeUtils {
     }
 
     /**
-     * Eval in the global environment. *
+     * Eval in the global environment.
      */
     public Object eval(Object x) {
         return eval(x, this.globalEnvironment);
